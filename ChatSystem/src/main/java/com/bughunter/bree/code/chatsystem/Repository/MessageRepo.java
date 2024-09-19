@@ -1,4 +1,4 @@
-package com.bughunter.bree.code.chatsystem.Entity.Repository;
+package com.bughunter.bree.code.chatsystem.Repository;
 
 import com.bughunter.bree.code.chatsystem.Entity.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MessageRepo extends JpaRepository<Message,Long> {
 
-    List<Message> findMessagesByTimestamp(LocalDateTime startOfDay, LocalDateTime endOfDay);
+    List<Message> findMessagesByDate(LocalDateTime startOfDay, LocalDateTime endOfDay);
 
 }
