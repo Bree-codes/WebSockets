@@ -23,11 +23,8 @@ public class MessageService {
         messageRepo.save(message);
     }
 
-    public List<Message> findMessagesByDate(LocalDate date){
-
-        LocalDateTime startOfDay = date.atStartOfDay();
-        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
-
-        return messageRepo.findMessagesByDate(startOfDay,endOfDay);
+    public List<Message> getMessagesByDateRange(LocalDateTime startOfDay, LocalDateTime endOfDay) {
+        return messageRepo.findAllByTimestampBetween(startOfDay, endOfDay);
     }
+
 }

@@ -24,5 +24,8 @@ public class Message {
     private String content;
     private LocalDateTime timestamp;
 
+    @ManyToOne
+    private Message replyTo;
+
 
 }

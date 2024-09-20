@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface MessageRepo extends JpaRepository<Message,Long> {
 
-    List<Message> findMessagesByDate(LocalDateTime startOfDay, LocalDateTime endOfDay);
+    List<Message> findAllByTimestampBetween(LocalDateTime startOfDay, LocalDateTime endOfDay);
 
 }
