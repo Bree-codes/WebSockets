@@ -4,6 +4,7 @@ import com.bughunter.bree.code.chatsystem.Entity.Message;
 import com.bughunter.bree.code.chatsystem.Entity.User;
 import com.bughunter.bree.code.chatsystem.ExceptionHandler.MessageNotFoundException;
 import com.bughunter.bree.code.chatsystem.Repository.MessageRepo;
+import com.bughunter.bree.code.chatsystem.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,15 @@ import java.util.Optional;
 @Slf4j
 public class MessageService {
 
-    public final MessageRepo messageRepo;
+    private final MessageRepo messageRepo;
 
-    public void saveMessage(String content, User sender, Message replyTo){
+    private final UserRepository userRepository;
+
+
+    public void saveMessage(String content, Integer userId, Message replyTo){
+
+
+        User sender = userRepository.findById(userId).orElseThrow(RuntimeException::new);
         
         Message message = new Message();
         message.setContent(content);

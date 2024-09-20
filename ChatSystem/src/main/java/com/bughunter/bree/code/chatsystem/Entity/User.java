@@ -1,19 +1,15 @@
 package com.bughunter.bree.code.chatsystem.Entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@Table
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false,updatable = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer userId;
 
     private String firstName;
@@ -25,4 +21,6 @@ public class User {
 
     @Column(nullable = false)
     private String email;
+
+
 }

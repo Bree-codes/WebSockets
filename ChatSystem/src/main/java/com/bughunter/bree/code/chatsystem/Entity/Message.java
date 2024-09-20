@@ -1,5 +1,6 @@
 package com.bughunter.bree.code.chatsystem.Entity;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Message {
     private User sender;
 
     private String content;
+
     private LocalDateTime timestamp;
 
     @ManyToOne

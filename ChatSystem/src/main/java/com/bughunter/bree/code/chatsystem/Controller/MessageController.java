@@ -22,7 +22,7 @@ public class MessageController {
     public ResponseEntity<Void> sendMessage(@RequestBody MessageModel model) {
         Message replyTo = model.getReplyToId() != null ?
                 messageService.getMessageById(model.getReplyToId()) : null;
-        messageService.saveMessage(model.getContent(), model.getSender(), replyTo);
+        messageService.saveMessage(model.getContent(), model.getId(), replyTo);
         return ResponseEntity.ok().build();
     }
 
@@ -39,5 +39,3 @@ public class MessageController {
         return ResponseEntity.ok(messages);
     }
 }
-
-
