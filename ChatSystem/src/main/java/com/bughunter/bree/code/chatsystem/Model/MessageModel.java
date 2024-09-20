@@ -8,6 +8,5 @@ public class MessageModel {
 
     private String content;
     private User sender;
-    private String fileUrl;
     private Long replyToId;
 }
