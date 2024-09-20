@@ -1,12 +1,13 @@
 package com.bughunter.bree.code.chatsystem.Model;
 
+import com.bughunter.bree.code.chatsystem.Entity.User;
 import lombok.Data;
 
 @Data
-
 public class MessageModel {
+
     private String content;
-    private String sender;
+    private User sender;
     private String fileUrl;
     private Long replyToId;
 }
