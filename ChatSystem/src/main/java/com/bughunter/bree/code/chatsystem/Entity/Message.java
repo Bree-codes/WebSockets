@@ -27,7 +27,10 @@ public class Message {
     private LocalDateTime timestamp;
 
     @ManyToOne
+    @JoinColumn(name = "reply_to_id", nullable = true)
     private Message replyTo;
+
+    private String fileUrl;
 
 
 }

@@ -7,7 +7,11 @@ public class MessageModel {
 
     private String content;
 
-    private Integer  Id;
+    //private Integer  Id;
 
     private Long replyToId;
+
+    private String fileUrl;
+
+
 }
