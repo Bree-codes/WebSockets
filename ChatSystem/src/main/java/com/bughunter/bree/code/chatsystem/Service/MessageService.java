@@ -8,10 +8,7 @@ import com.bughunter.bree.code.chatsystem.Repository.MessageRepo;
 import com.bughunter.bree.code.chatsystem.Repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,10 +23,8 @@ public class MessageService {
 
     private final UserRepository userRepository;
 
-    private final FileService fileService;
 
-
-    public String saveMessage(Integer userId, MessageModel messageModel, MultipartFile file) {
+    public String saveMessage(Integer userId, MessageModel messageModel) {
 
         // Fetch the sender (user) from the database
         User sender = userRepository.findById(userId)
@@ -43,16 +38,11 @@ public class MessageService {
 
         // Handle the reply to a message
         if (messageModel.getReplyToId() != null) {
-            Message replyToMessage = messageRepo.findById(messageModel.getReplyToId())
-                    .orElseThrow(() -> new RuntimeException("Reply-to message not found"));
+            Message replyToMessage = getMessageById(messageModel.getReplyToId());
             message.setReplyTo(replyToMessage);
         }
 
-        // Handle file uploads (if any)
-        if (file != null && !file.isEmpty()) {
-            String fileUrl = fileService.uploadFile(file); // Assume file service handles the upload
-            message.setFileUrl(fileUrl); // Save the file URL to the database
-        }
+        if (messageModel.getFileUrl() != null) message.setFileUrl(messageModel.getFileUrl());
 
         // Save the message
         messageRepo.save(message);
@@ -66,10 +56,9 @@ public class MessageService {
     // Checking whether the message being replied to exists
     public Message getMessageById(Long id) {
         Optional<Message> messageOptional = messageRepo.findById(id);
-        if (messageOptional.isPresent()) {
+        if (messageOptional.isPresent())
             return messageOptional.get();
-        } else {
+        else
             throw new MessageNotFoundException("Message with id " + id + " not found");
-        }
     }
 }

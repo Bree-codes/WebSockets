@@ -2,14 +2,12 @@ package com.bughunter.bree.code.chatsystem.Controller;
 
 import com.bughunter.bree.code.chatsystem.Entity.Message;
 import com.bughunter.bree.code.chatsystem.Model.MessageModel;
-import com.bughunter.bree.code.chatsystem.Service.FileService;
 import com.bughunter.bree.code.chatsystem.Service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,11 +23,9 @@ public class MessageController {
     // Endpoint for saving a message (can include file uploads)
     @PostMapping("/save")
     public ResponseEntity<String> saveMessage(@RequestParam("userId") Integer userId,
-                                              @ModelAttribute MessageModel messageModel,
-                                              @RequestParam(value = "file", required = false) MultipartFile file) {
+                                              @ModelAttribute MessageModel messageModel) {
         // Save the message (including optional file)
-        messageService.saveMessage(userId, messageModel, file);
-        return new ResponseEntity<>("Message saved successfully", HttpStatus.OK);
+        return new ResponseEntity<>(messageService.saveMessage(userId, messageModel), HttpStatus.OK);
     }
 
     // Endpoint for retrieving messages by date range

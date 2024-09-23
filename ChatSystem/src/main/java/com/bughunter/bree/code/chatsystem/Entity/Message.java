@@ -1,6 +1,5 @@
 package com.bughunter.bree.code.chatsystem.Entity;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,11 +25,9 @@ public class Message {
 
     private LocalDateTime timestamp;
 
-    @ManyToOne
-    @JoinColumn(name = "reply_to_id", nullable = true)
+    @OneToOne
     private Message replyTo;
 
     private String fileUrl;
-
 
 }
