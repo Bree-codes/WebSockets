@@ -29,9 +29,9 @@ public class MessageService {
     private final FileService fileService;
 
 
-    public void saveMessage(Integer userId, MessageModel messageModel, MultipartFile file) {
+    public String saveMessage(Integer userId, MessageModel messageModel, MultipartFile file) {
 
-        // Fetch the sender user from the database
+        // Fetch the sender (user) from the database
         User sender = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -56,12 +56,14 @@ public class MessageService {
 
         // Save the message
         messageRepo.save(message);
+        return "Message saved successfully.";
     }
 
     public List<Message> getMessagesByDateRange(LocalDateTime startOfDay, LocalDateTime endOfDay) {
         return messageRepo.findAllByTimestampBetween(startOfDay, endOfDay);
     }
 
+    // Checking whether the message being replied to exists
     public Message getMessageById(Long id) {
         Optional<Message> messageOptional = messageRepo.findById(id);
         if (messageOptional.isPresent()) {
