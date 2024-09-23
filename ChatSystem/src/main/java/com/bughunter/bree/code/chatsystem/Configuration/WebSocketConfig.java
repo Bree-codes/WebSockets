@@ -1,4 +1,4 @@
-/*package com.bughunter.bree.code.chatsystem.Configuration;
+package com.bughunter.bree.code.chatsystem.Configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -22,4 +22,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.enableSimpleBroker("/topic");
     }
 
-}*/
+}

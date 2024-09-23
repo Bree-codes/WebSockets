@@ -24,7 +24,7 @@ public class MessageService {
     private final UserRepository userRepository;
 
 
-    public String saveMessage(Integer userId, MessageModel messageModel) {
+    public Message saveMessage(Integer userId, MessageModel messageModel) {
 
         // Fetch the sender (user) from the database
         User sender = userRepository.findById(userId)
@@ -46,7 +46,8 @@ public class MessageService {
 
         // Save the message
         messageRepo.save(message);
-        return "Message saved successfully.";
+
+        return message;
     }
 
     public List<Message> getMessagesByDateRange(LocalDateTime startOfDay, LocalDateTime endOfDay) {

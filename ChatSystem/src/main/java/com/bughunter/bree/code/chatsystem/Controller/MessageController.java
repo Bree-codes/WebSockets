@@ -7,29 +7,29 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/messaging")
+@Controller
 @RequiredArgsConstructor
 public class MessageController {
 
-    //private final FileService fileService;
     private final MessageService messageService;
 
-    // Endpoint for saving a message (can include file uploads)
-    @PostMapping("/save")
-    public ResponseEntity<String> saveMessage(@RequestParam("userId") Integer userId,
-                                              @ModelAttribute MessageModel messageModel) {
-        // Save the message (including optional file)
-        return new ResponseEntity<>(messageService.saveMessage(userId, messageModel), HttpStatus.OK);
+    // Endpoint for sending messages
+    @MessageMapping("/send")
+    @SendTo("/topic/messages")
+    public Message sendMessage(MessageModel messageModel) {
+        return messageService.saveMessage(messageModel.getUserId(), messageModel);
     }
 
     // Endpoint for retrieving messages by date range
-    @GetMapping("/by-date")
+    @GetMapping("/messages/by-date")
     public ResponseEntity<List<Message>> getMessagesByDate(
             @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start,
             @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end) {
