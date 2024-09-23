@@ -1,3 +1,4 @@
+/*
 package com.bughunter.bree.code.chatsystem.Configuration;
 
 import lombok.NonNull;
@@ -34,3 +35,4 @@ public class WebSocketHandler extends TextWebSocketHandler {
         }
     }
 }
+*/

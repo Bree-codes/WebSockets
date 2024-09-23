@@ -1,3 +1,4 @@
+/*
 package com.bughunter.bree.code.chatsystem.Configuration;
 
 import org.springframework.context.annotation.Configuration;
@@ -15,3 +16,4 @@ public class SocketConfig implements WebSocketConfigurer {
         registry.addHandler(new WebSocketHandler() ,"/websocket").setAllowedOrigins("*");
     }
 }
+*/

@@ -21,13 +21,6 @@ public class MessageController {
 
     private final MessageService messageService;
 
-    // Endpoint for sending messages
-    @MessageMapping("/send")
-    @SendTo("/topic/messages")
-    public Message sendMessage(MessageModel messageModel) {
-        return messageService.saveMessage(messageModel.getUserId(), messageModel);
-    }
-
     // Endpoint for retrieving messages by date range
     @GetMapping("/messages/by-date")
     public ResponseEntity<List<Message>> getMessagesByDate(
