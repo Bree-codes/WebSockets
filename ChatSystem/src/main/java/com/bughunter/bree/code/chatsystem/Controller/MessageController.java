@@ -32,20 +32,6 @@ public class MessageController {
         return new ResponseEntity<>("Message saved successfully", HttpStatus.OK);
     }
 
-    // Endpoint for sending a message (including replies and file uploads)
-    @PostMapping("/send")
-    public ResponseEntity<Void> sendMessage(
-            @RequestParam("userId") Integer userId,
-            @ModelAttribute MessageModel model,
-            @RequestParam(value = "file", required = false) MultipartFile file) {
-
-        // Save the message (including optional file)
-        messageService.saveMessage(userId, model, file);
-
-        // Return an OK response
-        return ResponseEntity.ok().build();
-    }
-
     // Endpoint for retrieving messages by date range
     @GetMapping("/by-date")
     public ResponseEntity<List<Message>> getMessagesByDate(
